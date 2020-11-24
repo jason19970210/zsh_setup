@@ -167,7 +167,7 @@ alias q='exit'
 alias ls='ls -alh'
 alias vimzshrc='vim ~/.zshrc && source $_'
 alias src='source ~/.zshrc'
-alias updatezsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push'
+alias updatezsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push -q'
 
 if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
