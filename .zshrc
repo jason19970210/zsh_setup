@@ -1,6 +1,5 @@
 ##############################
 
-# Run after `zsh.sh`
 # System Environment Requirement : zsh has been installed !!
 
 #### Functions
@@ -68,6 +67,9 @@ if [[ $envos = "macOS" ]]; then
 
     ## `:` means do nothing in shell script
     ## Package Installation
+    ### git
+    check git && : || brew install git
+    ### xcode-select --install | -p 
     ### GDB & peda
     ### Hint : On 10.12 (Sierra) or later with SIP, you need to run this:
     ### $ echo "set startup-with-shell off" >> ~/.gdbinit
@@ -103,6 +105,10 @@ if [[ $envos = "macOS" ]]; then
 
 elif [[ $envos = "Linux" ]]; then
 
+    if [ $envsh != "zsh" ]; then
+        check zsh && : || (sudo apt install zsh)
+        chsh -s $(which zsh) && gnome-session-quit --no-prompt
+    fi
     ## Linux Ubuntu Environment
     export PATH=/usr/local/bin:$PATH
     ### zsh autosuggestions
@@ -115,8 +121,10 @@ elif [[ $envos = "Linux" ]]; then
     ### pip3
     check pip3 && : || (sudo apt install python3-pip -y)
     ### gdb & peda
-    check gdb && : || (brew install gdb && echo "set startup-with-shell off" >> ./.gdbinit)
+    check gdb && : || (sudo apt install gdb && echo "set startup-with-shell off" >> ./.gdbinit)
     [ -d ~/peda/ ] && : || (git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit)
+    ### binwalk
+    check binwalk && : || (sudo apt install binwalk -y)
 fi
 
 
@@ -159,6 +167,7 @@ alias q='exit'
 alias ls='ls -alh'
 alias vimzshrc='vim ~/.zshrc && source $_'
 alias src='source ~/.zshrc'
+alias updatezsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push'
 
 if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
