@@ -1,6 +1,6 @@
 ##############################
 
-# System Environment Requirement : zsh has been installed !!
+[ -f ~/.zshrc ] && : || (wget https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -P ~/ && source ~/.zshrc )
 
 #### Functions
 check(){  # Check package install or not
@@ -180,7 +180,7 @@ if [ $envos = "macOS" ]; then
     ### echo <pwd> | sudo -S ...
     alias vpn_on='echo " " | sudo -S wg-quick up ~/.config/wireguard/wg0.conf && echo ' 
     alias vpn_off='wg-quick down ~/.config/wireguard/wg0.conf && echo '
-    alias vpn_status='echo " " | sudo -S wg show'
+    alias vpn_status='sudo wg show'
 fi
 
 ### Default Command which will execute every time when shell loaded
