@@ -161,6 +161,9 @@ elif [[ $envos = "Linux" ]]; then
     [ -d ~/peda/ ] && : || ( git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit )
     ### binwalk
     check binwalk && : || (sudo apt install binwalk -y)
+    ### one_gadget
+    ### https://github.com/david942j/one_gadget
+    check gem && : || (sudo apt install ruby -y) && (sudo gem install gadget)
 fi
 
 
@@ -172,8 +175,8 @@ fi
 ### Source path : ~/.zsh/zsh-autosuggestions
 ### Uninstallation : `$ rm -rf ~/.zsh/zsh-autosuggestions`
 ### Delete or comment below line
-[ -d ~/.zsh/zsh-autosuggestions ] && : || ( git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions )
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -d ~/.zsh_setup/zsh-autosuggestions ] && : || ( git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh_setup/zsh-autosuggestions )
+source ~/.zsh_setup/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
@@ -183,9 +186,9 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 ### Path : ~/.zsh/
 ### alias.sh download link : https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh
 ### ip.sh download link : https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh
-[ -f ~/.zsh_setup/alias.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh_setup/alias.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
-[ -f ~/.zsh_setup/ip.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh_setup/ip.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
-export PATH=$HOME/.zsh:$PATH
+[ -f ~/.zsh_setup/alias.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh_setup/alias.sh && echo " " | sudo -S chmod +x ~/.zsh_setup/alias.sh)
+[ -f ~/.zsh_setup/ip.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh_setup/ip.sh && echo " " | sudo -S chmod +x ~/.zsh_setup/alias.sh)
+export PATH=$HOME/.zsh_setup:$PATH
 
 
 ##############################
@@ -196,7 +199,7 @@ alias q='exit'
 alias ls='ls -alh'
 alias vimzshrc='vim ~/.zshrc && source $_ && '
 alias src='source ~/.zshrc'
-alias pushzsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push -q'
+alias pushzsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push'
 
 if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
