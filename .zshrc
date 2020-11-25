@@ -157,6 +157,9 @@ elif [[ $envos = "Linux" ]]; then
         check zsh && : || (sudo apt install zsh)
         chsh -s $(which zsh) && gnome-session-quit --no-prompt
     fi
+    ### show-date-in-top-bar
+    ### Ref : https://askubuntu.com/questions/1040306/how-to-show-date-in-top-bar-of-deskop-in-ubuntu-18-04-lts
+    $(dconf read /org/gnome/desktop/interface/clock-show-date) && : || (dconf write /org/gnome/desktop/interface/clock-show-date 'true') 
     ## Linux Ubuntu Environment
     export PATH=/usr/local/bin:$PATH
     ### ifconfig
