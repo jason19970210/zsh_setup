@@ -6,7 +6,7 @@ Setting ZSH config with `.zshrc` file
 ```sh
 $ git clone https://github.com/jason19970210/zsh_setup.git ~/.zsh_setup
 
-$ cp .zsh_setup/.zshrc ~/
+$ cp ~/.zsh_setup/.zshrc ~/
 
 $ source ~/.zshrc
 ```
