@@ -57,7 +57,7 @@ function objdump_function {
         "" | -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
         -f | --function)
             #objdump -M intel -d $1 | grep ^0 | cut -c 19- | awk 'BEGIN {FS=">"}; { print " " $1}'
-            objdump -M intel -d $1 | grep ^0 | awk -F: '{print $1}' ;;   
+            objdump -M intel -d $2 | grep ^0 | awk -F: '{print $1}' ;;   
         *)
             case "$2" in
                 # no second argument
