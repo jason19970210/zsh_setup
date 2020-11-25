@@ -6,9 +6,10 @@ author="jason19970210"
 
 help() {
     echo "Show alias in an effective way." 
-    echo "Usage: alias.sh [ -l | -h | -v | -i ]" >&2
+    echo "Usage: alias.sh [ -l | -f | -h | -v | -i ]" >&2
     echo
     echo "   -l, --list              Full information of alias"
+    echo "   -f, --function          Show information of functions"
     echo "   -h, --help              Show this help"
     echo "   -v, --version           Show script version"
     echo "   -i, --info              Show script information"
@@ -18,6 +19,7 @@ help() {
 
 list(){
     echo
+    echo "+++ Alias +++"
     while read line ; do
         #echo "$line"
         #grep -q "alias" $1
@@ -28,8 +30,26 @@ list(){
 
 normal(){
     echo
+    echo "+++ Alias +++"
     while read line ; do
-        grep ^alias | cut -c 7- | awk 'BEGIN {FS="="}; { print " " $1}' | column -t -s "'"
+        grep ^alias | cut -c 7- | awk 'BEGIN {FS="="}; { print " " $1}' 
+        #grep ^function | cut -c 10- | awk 'BEGIN {FS="{"}; { print " " $1}'
+    done < ~/.zshrc
+    echo
+    echo "+++ Functions +++"
+    while read line ; do
+        #grep ^alias | cut -c 7- | awk 'BEGIN {FS="="}; { print " " $1}' 
+        grep ^function | cut -c 10- | awk 'BEGIN {FS="{"}; { print " " $1}'
+    done < ~/.zshrc
+    echo
+}
+
+function(){
+    echo
+    echo "+++ Functions +++"
+    while read line ; do
+        #grep ^alias | cut -c 7- | awk 'BEGIN {FS="="}; { print " " $1}' 
+        grep ^function | cut -c 10- | awk 'BEGIN {FS="{"}; { print " " $1}'
     done < ~/.zshrc
     echo
 }
@@ -48,6 +68,7 @@ version(){
 
 
 ## If no argument
+## `$#` shows the numbers of arguments
 if [ $# = 0 ] 
     then
         normal
@@ -64,7 +85,9 @@ if [ $# = 0 ]
                     list
                     exit 0
                     ;;
-
+                -f | --function)
+                    function
+                    ;;
                 -v | --version)
                     version
                     exit 0
