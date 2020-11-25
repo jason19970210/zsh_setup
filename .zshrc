@@ -179,7 +179,7 @@ fi
 ### Source path : ~/.zsh/zsh-autosuggestions
 ### Uninstallation : `$ rm -rf ~/.zsh/zsh-autosuggestions`
 ### Delete or comment below line
-[ -d ~/.zsh_setup/zsh-autosuggestions ] && : || ( git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh_setup/zsh-autosuggestions )
+[ -f ~/.zsh_setup/zsh-autosuggestions/zsh-autosuggestions.zsh ] && : || ( git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh_setup/zsh-autosuggestions )
 source ~/.zsh_setup/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
