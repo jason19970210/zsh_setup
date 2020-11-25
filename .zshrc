@@ -62,9 +62,9 @@ function objdump_function {
 
 function pullzsh {
     echo "Updating alias.sh ..."
-    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh/alias.sh
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh_setup/alias.sh
     echo "Updating ip.sh ..."
-    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -O ~/.zsh/ip.sh
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -O ~/.zsh_setup/ip.sh
     echo "Updating .zshrc ..."
     wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -O ~/.zshrc
     src
@@ -183,8 +183,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 ### Path : ~/.zsh/
 ### alias.sh download link : https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh
 ### ip.sh download link : https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh
-[ -f ~/.zsh/alias.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh/alias.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
-[ -f ~/.zsh/ip.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh/ip.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
+[ -f ~/.zsh_setup/alias.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh_setup/alias.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
+[ -f ~/.zsh_setup/ip.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh_setup/ip.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
 export PATH=$HOME/.zsh:$PATH
 
 
