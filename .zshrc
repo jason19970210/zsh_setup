@@ -18,7 +18,7 @@ export LANG="en_US.UTF-8"
 
 ## Check file existed or not
 ## Ref : https://linuxize.com/post/bash-check-if-file-exists/
-[ ! -f ~/.zshrc ] && (wget https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -P ~/ && source ~/.zshrc ) || :
+[ ! -f ~/.zshrc ] && (wget https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -O ~/.zshrc && source ~/.zshrc ) || :
 
 #### Functions
 ## Use `function FUNC_NAME {}` to make it avaliable with alias.sh
@@ -62,11 +62,11 @@ function objdump_function {
 
 function pullzsh {
     echo "Updating alias.sh ..."
-    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -P ~/.zsh/
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh/alias.sh
     echo "Updating ip.sh ..."
-    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh/
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -O ~/.zsh/ip.sh
     echo "Updating .zshrc ..."
-    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -P ~/.zsh/
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -O ~/.zshrc
     src
 }
 
@@ -183,8 +183,8 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 ### Path : ~/.zsh/
 ### alias.sh download link : https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh
 ### ip.sh download link : https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh
-[ -f ~/.zsh/alias.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -P ~/.zsh/ && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
-[ -f ~/.zsh/ip.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh/ && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
+[ -f ~/.zsh/alias.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -O ~/.zsh/alias.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
+[ -f ~/.zsh/ip.sh ] && : || (wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh/ip.sh && echo " " | sudo -S chmod +x ~/.zsh/alias.sh)
 export PATH=$HOME/.zsh:$PATH
 
 
