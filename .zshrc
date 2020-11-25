@@ -244,6 +244,13 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 export PATH=$HOME/.zsh_setup:$PATH
 
 
+### Checksec Installation
+### Download link : https://github.com/slimm609/checksec.sh
+### download zip file
+### $ unzip checksec.sh-2.4.0.zip
+### $ cp checksec.sh-2.4.0.zip ~/.zsh_setup
+
+
 ##############################
 
 
