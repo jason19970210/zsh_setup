@@ -217,7 +217,6 @@ elif [[ $envos = "Linux" ]]; then
     ### one_gadget
     ### https://github.com/david942j/one_gadget
     check gem && : || (sudo apt install ruby -y && sudo gem install one_gadget)
-    check checksec && : || (sudo apt install checksec -y)
 fi
 
 
