@@ -44,11 +44,10 @@ normal(){
     echo
 }
 
-functions(){
+func(){
     echo
     echo "+++ Functions +++"
-    while read line ; do
-        #grep ^alias | cut -c 7- | awk 'BEGIN {FS="="}; { print " " $1}' 
+    while read line ; do 
         grep ^function | cut -c 10- | awk 'BEGIN {FS="{"}; { print " " $1}'
     done < ~/.zshrc
     echo
@@ -86,7 +85,8 @@ if [ $# = 0 ]
                     exit 0
                     ;;
                 -f | --function)
-                    functions
+                    func
+                    exit 0
                     ;;
                 -v | --version)
                     version
