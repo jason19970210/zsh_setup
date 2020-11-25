@@ -52,7 +52,13 @@ syscheck() {
 }
 
 function objdump_function {
-
+    ### How to make suggestion with tab
+    # $ objdump_function
+    # $ objdump_function -h | --help
+    # $ objdump_function -a file -f func
+    # $ objdump_function file func
+    # $ objdump_function file
+    
     case "$1" in
         "" | -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
         -f | --function)
