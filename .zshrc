@@ -163,7 +163,7 @@ elif [[ $envos = "Linux" ]]; then
     check binwalk && : || (sudo apt install binwalk -y)
     ### one_gadget
     ### https://github.com/david942j/one_gadget
-    check gem && : || (sudo apt install ruby -y) && (sudo gem install gadget)
+    check gem && : || (sudo apt install ruby -y && sudo gem install one_gadget)
 fi
 
 
