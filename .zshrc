@@ -73,7 +73,8 @@ function objdump_function {
             *) objdump -M intel -d $1 | grep ^0 | awk -F: '{print $1}' ;;
         esac
     elif [ $# = 2 ]; then
-        objdump -M intel -d $1 | sed '/<'$2'>:/,/^$/!d' ;;
+        objdump -M intel -d $1 | sed '/<'$2'>:/,/^$/!d'
+
     elif [ $# = 4 ]; then
         case "$1" in
             -a) 
@@ -82,7 +83,7 @@ function objdump_function {
                         objdump -M intel -d $1 | sed '/<'$2'>:/,/^$/!d' ;;
                     *)
                         echo "Usage" ;;
-                esac
+                esac ;;
             *)
                 echo "Usage" ;;
         esac
