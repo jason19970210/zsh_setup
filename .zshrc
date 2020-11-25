@@ -64,7 +64,7 @@ function objdump_function {
     
     # $ objdump_function -a file -f func
     
-    if [ $# = 0 | $# = 3 ]; then
+    if [ $# = 0 ]; then
         echo "Usage"
         exit 1
     elif [ $# = 1 ]; then
