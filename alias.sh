@@ -44,7 +44,7 @@ normal(){
     echo
 }
 
-function(){
+functions(){
     echo
     echo "+++ Functions +++"
     while read line ; do
@@ -86,7 +86,7 @@ if [ $# = 0 ]
                     exit 0
                     ;;
                 -f | --function)
-                    function
+                    functions
                     ;;
                 -v | --version)
                     version
