@@ -1,5 +1,9 @@
 
-# Last modify datetime : Wed Nov 25 11:17:52 CST 2020
+# Last modify datetime : Wed Nov 25 13:45:03 CST 2020
+
+## TODO List
+# [ V ] ...
+# [   ] check file permission
 
 ##############################
 
@@ -199,7 +203,7 @@ alias q='exit'
 alias ls='ls -alh'
 alias vimzshrc='vim ~/.zshrc && source $_ && '
 alias src='source ~/.zshrc'
-alias pushzsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push'
+alias pushzsh='cp ~/.zshrc ~/.zsh_setup && cd ~/.zsh_setup && git add . && git commit -m "Update" && git push'
 
 if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
