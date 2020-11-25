@@ -1,13 +1,31 @@
 ##############################
 
-[ -f ~/.zshrc ] && : || (wget https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -P ~/ && source ~/.zshrc )
+## Hint
+echo "Type 'alias.sh' to get alias options !!\n"
+
+## ZSH Prompt Config
+PROMPT='%n:%~ %(!.#.$) '
+
+## ZSH History Time Stamp Format
+HIST_STAMPS="yyyy/mm/dd"
+
+## Set Terminal Language to en_US
+export LANG="en_US.UTF-8"
+
+
+## Check file existed or not
+## Ref : https://linuxize.com/post/bash-check-if-file-exists/
+[ ! -f ~/.zshrc ] && (wget https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -P ~/ && source ~/.zshrc ) || :
 
 #### Functions
-check(){  # Check package install or not
+## Use `function FUNC_NAME {}` to make it avaliable with alias.sh
+function check {
+    # Check package install or not
     which $1 &> /dev/null
 }
 
-syscheck(){
+
+syscheck() {
     ## Check Working OS
     case "$OSTYPE" in
         solaris*)   envos="Solaris" ;;
@@ -26,17 +44,32 @@ syscheck(){
     esac
 }
 
+function objdump_function {
+
+    case "$1" in
+        "" | -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
+        *)
+            case "$2" in
+                "" | -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
+                *)
+                    objdump -M intel -d $1 | awk -v RS= '/^[[:xdigit:]]+ <'$2'>/';;
+            esac
+    esac
+}
+
+function pullzsh {
+    echo "Updating alias.sh ..."
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/alias.sh -P ~/.zsh/
+    echo "Updating ip.sh ..."
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -P ~/.zsh/
+    echo "Updating .zshrc ..."
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -P ~/.zsh/
+    src
+}
+
+### Call Function
 syscheck
 
-
-## Brew Config
-## Ref : https://docs.brew.sh/Shell-Completion
-### ZSH Completion
-#if type brew &>/dev/null; then
-#  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-#  autoload -Uz compinit
-#  compinit
-#fi
 
 if [[ $envos = "macOS" ]]; then
 
@@ -45,6 +78,9 @@ if [[ $envos = "macOS" ]]; then
     export PATH=/usr/local/bin:$PATH
     export PATH="$(brew --prefix)/bin:$PATH"
 
+    ## Brew Config
+    ## Ref : https://docs.brew.sh/Shell-Completion
+    ### ZSH Completion
     if type brew &>/dev/null; then
         FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
         autoload -Uz compinit
@@ -74,24 +110,24 @@ if [[ $envos = "macOS" ]]; then
     ### Hint : On 10.12 (Sierra) or later with SIP, you need to run this:
     ### $ echo "set startup-with-shell off" >> ~/.gdbinit
     ### Ref of SIP : https://sspai.com/post/55066
-    check gdb && : || (brew install gdb && echo "set startup-with-shell off" >> ./.gdbinit)
-    [ -d ~/peda/ ] && : || (git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit)
+    check gdb && : || ( brew install gdb && echo "set startup-with-shell off" >> ./.gdbinit )
+    [ -d ~/peda/ ] && : || ( git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit )
     ### binwalk
-    check binwalk && : || (brew install binwalk)
+    check binwalk && : || ( brew install binwalk )
     ### binutils (readelf & objdump)
-    [ -d /usr/local/opt/binutils/ ] && : || (brew install binutils)
+    [ -d /usr/local/opt/binutils/ ] && : || ( brew install binutils )
     ## Ref : https://www.jianshu.com/p/4b93b0665a2b
     ### `$ brew install binutils`
     export PATH="/usr/local/opt/binutils/bin:$PATH"
     export LDFLAGS="-L/usr/local/opt/binutils/lib"
     export CPPFLAGS="-I/usr/local/opt/binutils/include"
     ### arp-scan
-    check arp-scan && : || (brew install arp-scan)
+    check arp-scan && : || ( brew install arp-scan )
     export PATH="/usr/local/opt/libpcap/bin:$PATH"
     export LDFLAGS="-L/usr/local/opt/libpcap/lib"
     export CPPFLAGS="-I/usr/local/opt/libpcap/include"
     ### Speedtest-cli
-    check speedtest-cli && : || (brew install speedtest-cli)
+    check speedtest-cli && : || ( brew install speedtest-cli )
     ### wireguard-tools
     check wg && : || brew install wireguard-tools
     ### Ghidra
@@ -111,9 +147,6 @@ elif [[ $envos = "Linux" ]]; then
     fi
     ## Linux Ubuntu Environment
     export PATH=/usr/local/bin:$PATH
-    ### zsh autosuggestions
-    [ -d ~/.zsh/zsh-autosuggestions ] && : || ( git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions )
-    source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
     ### ifconfig
     check ifconfig && : || (sudo apt install net-tools -y)
     ### vim
@@ -121,8 +154,8 @@ elif [[ $envos = "Linux" ]]; then
     ### pip3
     check pip3 && : || (sudo apt install python3-pip -y)
     ### gdb & peda
-    check gdb && : || (sudo apt install gdb && echo "set startup-with-shell off" >> ./.gdbinit)
-    [ -d ~/peda/ ] && : || (git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit)
+    check gdb && : || ( sudo apt install gdb && echo "set startup-with-shell off" >> ./.gdbinit )
+    [ -d ~/peda/ ] && : || ( git clone https://github.com/longld/peda.git ~/peda && echo "source ~/peda/peda.py" >> ~/.gdbinit )
     ### binwalk
     check binwalk && : || (sudo apt install binwalk -y)
 fi
@@ -130,21 +163,14 @@ fi
 
 
 ## Both macOS & Linux Ubuntu
-## Hint
-echo "Type 'alias.sh' to get alias options !!\n"
-
-## ZSH Prompt Config
-PROMPT='%n:%~ %(!.#.$) '
-
-## ZSH History Time Stamp Format
-HIST_STAMPS="yyyy/mm/dd"
 
 ### ZSH Autosuggestion
 ### Download Github repo from `https://github.com/zsh-users/zsh-autosuggestions`
 ### Source path : ~/.zsh/zsh-autosuggestions
 ### Uninstallation : `$ rm -rf ~/.zsh/zsh-autosuggestions`
 ### Delete or comment below line
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -d ~/.zsh/zsh-autosuggestions ] && : || ( git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions )
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 ### https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
@@ -165,9 +191,9 @@ export PATH=$HOME/.zsh:$PATH
 ## Alias
 alias q='exit'
 alias ls='ls -alh'
-alias vimzshrc='vim ~/.zshrc && source $_'
+alias vimzshrc='vim ~/.zshrc && source $_ && '
 alias src='source ~/.zshrc'
-alias updatezsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push -q'
+alias pushzsh='cp ~/.zshrc ~/Desktop/zsh_setup && cd ~/Desktop/zsh_setup && git add . && git commit -m "Update .zshrc file" && git push -q'
 
 if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
