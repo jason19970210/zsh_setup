@@ -4,6 +4,7 @@
 ## TODO List
 # [ V ] ...
 # [   ] check file permission
+# [   ] Make suggestion with tab (objdump_function)
 
 ##############################
 
@@ -52,27 +53,60 @@ syscheck() {
 }
 
 function objdump_function {
-    ### How to make suggestion with tab
+    
     # $ objdump_function
-    # $ objdump_function -h | --help
-    # $ objdump_function -a file -f func
-    # $ objdump_function file func
+    
+    # $ objdump_function -h
+    # $ objdump_function --help
     # $ objdump_function file
     
-    case "$1" in
-        "" | -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
-        -f | --function)
+    # $ objdump_function file func
+    
+    # $ objdump_function -a file -f func
+    
+    if [ $# = 0 | $# = 3 ]; then
+        echo "Usage"
+        exit 1
+    elif [ $# = 1 ]; then
+        case "$1" in
+            -h | --help) echo "Usage" ;;
+            *) objdump -M intel -d $1 | grep ^0 | awk -F: '{print $1}' ;;
+        esac
+    elif [ $# = 2 ]; then
+        objdump -M intel -d $1 | sed '/<'$2'>:/,/^$/!d';;
+    elif [ $# = 4 ]; then
+        case "$1" in
+            -a) 
+                case "$3" in
+                    -f) 
+                        objdump -M intel -d $1 | sed '/<'$2'>:/,/^$/!d';;
+                    *)
+                        echo "Usage";;
+                esac
+            *)
+                echo "Usage";;
+        esac
+    fi
+    
+    
+    #case "$1" in
+    #    "" | -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
+    #    -a)
+    #        [ -f $2 ] && : || (echo "File not found !" && exit 1) ;;
+            
+        
+        #-f | --function)
             #objdump -M intel -d $1 | grep ^0 | cut -c 19- | awk 'BEGIN {FS=">"}; { print " " $1}'
-            objdump -M intel -d $2 | grep ^0 | awk -F: '{print $1}' ;;   
-        *)
-            case "$2" in
+        #    objdump -M intel -d $2 | grep ^0 | awk -F: '{print $1}' ;;   
+    #    *)
+    #        case "$2" in
                 # no second argument
-                "") objdump -M intel -d $1 | grep ^0 | awk -F: '{print $1}';;
-                -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
-                *)
-                    objdump -d $1 | sed '/<'$2'>:/,/^$/!d';;
-            esac
-    esac
+    #            "") objdump -M intel -d $1 | grep ^0 | awk -F: '{print $1}';;
+    #            -h | --help) echo "Usgae : objdump_function [TARGET_FILE] [TARGET_FUNCTION]";;
+    #            *)
+    #                objdump -d $1 | sed '/<'$2'>:/,/^$/!d';;
+    #        esac
+    #esac
 }
 
 function pullzsh {
