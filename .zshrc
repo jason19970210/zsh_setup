@@ -201,7 +201,7 @@ export PATH=$HOME/.zsh_setup:$PATH
 ## Alias
 alias q='exit'
 alias ls='ls -alh'
-alias vimzshrc='vim ~/.zshrc && source $_'
+alias vimzshrc='vim ~/.zshrc && source $_ && cp ~/.zshrc ~/.zsh_setup'
 alias src='source ~/.zshrc'
 alias pushzsh='cp ~/.zshrc ~/.zsh_setup && cd ~/.zsh_setup && git add . && git commit -m "Update" && git push'
 
