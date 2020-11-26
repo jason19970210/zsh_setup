@@ -278,5 +278,6 @@ fi
 
 ### Default Command which will execute every time when shell loaded
 ip.sh
+printf "%-12s: %s\n" Oper\ System $envos
 
 echo
