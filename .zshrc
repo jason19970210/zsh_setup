@@ -11,7 +11,9 @@
 #       - echo "/usr/local/Cellar/pwntools/4.3.0/libexec/lib/python3.9/site-packages" >> pwntools.pth ( Insert env variable with pth file )
 # [   ] < macOS >  Install ghidra
 # [   ] < All >    Get config file of wireguard file
-# [   ] < Linux >  Install full tools for GDB (ref : https://github.com/apogiatzis/gdb-peda-pwndbg-gef)
+# [   ] < Linux >  Install full tools for GDB
+#       - ref : https://github.com/apogiatzis/gdb-peda-pwndbg-gef
+#       - ref : https://medium.com/bugbountywriteup/pwndbg-gef-peda-one-for-all-and-all-for-one-714d71bf36b8    
 
 ##############################
 
