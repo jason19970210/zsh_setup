@@ -122,8 +122,7 @@ function pullzsh {
     echo "Updating ip.sh ..."
     wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/ip.sh -O ~/.zsh_setup/ip.sh
     echo "Updating .zshrc ..."
-    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -O ~/.zshrc
-    src
+    wget -q https://raw.githubusercontent.com/jason19970210/zsh_setup/main/.zshrc -O ~/.zshrc && $_
 }
 
 ### Call Function
