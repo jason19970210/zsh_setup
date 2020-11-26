@@ -1,16 +1,17 @@
 
-# Last modify datetime : Wed Nov 25 23:07:56 CST 2020
+# Last modify datetime : Fri Nov 27 02:36:37 CST 2020
 
 ## TODO List
 # [ V ] ...
-# [   ] check file permission
-# [   ] Make suggestion with tab (objdump_function)
-# [   ] macOS install pwntools (ref : https://home.gamer.com.tw/creationDetail.php?sn=4871978)
+# [   ] < All >    Check file permission
+# [   ] < All >    Make suggestion with tab (objdump_function)
+# [   ] < macOS >  Install pwntools (ref : https://home.gamer.com.tw/creationDetail.php?sn=4871978)
 #       - brew install pwntools binutils ( Installation Path : /usr/local/Cellar/pwntools )
 #       - cd /usr/local/lib/python3.9/site-packages (Where `site-packages` located )
 #       - echo "/usr/local/Cellar/pwntools/4.3.0/libexec/lib/python3.9/site-packages" >> pwntools.pth ( Insert env variable with pth file )
-# [   ] macOS install ghidra
-# [   ] get config file of wireguard file
+# [   ] < macOS >  Install ghidra
+# [   ] < All >    Get config file of wireguard file
+# [   ] < Linux >  Install full tools for GDB (ref : https://github.com/apogiatzis/gdb-peda-pwndbg-gef)
 
 ##############################
 
