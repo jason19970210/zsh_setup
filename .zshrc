@@ -9,7 +9,8 @@
 #       - brew install pwntools binutils ( Installation Path : /usr/local/Cellar/pwntools )
 #       - cd /usr/local/lib/python3.9/site-packages (Where `site-packages` located )
 #       - echo "/usr/local/Cellar/pwntools/4.3.0/libexec/lib/python3.9/site-packages" >> pwntools.pth ( Insert env variable with pth file )
-#
+# [   ] macOS install ghidra
+# [   ] get config file of wireguard file
 
 ##############################
 
