@@ -13,7 +13,7 @@
 # [   ] < All >    Get config file of wireguard file
 # [   ] < Linux >  Install full tools for GDB
 #       - ref : https://github.com/apogiatzis/gdb-peda-pwndbg-gef
-#       - ref : https://medium.com/bugbountywriteup/pwndbg-gef-peda-one-for-all-and-all-for-one-714d71bf36b8    
+#       - ref : https://medium.com/bugbountywriteup/pwndbg-gef-peda-one-for-all-and-all-for-one-714d71bf36b8
 
 ##############################
 
