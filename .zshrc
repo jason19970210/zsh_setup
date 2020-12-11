@@ -135,6 +135,10 @@ syscheck
 if [[ $envos = "macOS" ]]; then
 
     ## Mac Environment
+    
+    #### Finder Config
+    $(defaults read com.apple.Finder AppleShowAllFiles) && : || (defaults write com.apple.Finder AppleShowAllFiles true)
+    
     #### Environment Variable
     export PATH=/usr/local/bin:$PATH
     export PATH="$(brew --prefix)/bin:$PATH"
@@ -226,6 +230,8 @@ elif [[ $envos = "Linux" ]]; then
     ### https://github.com/david942j/one_gadget
     check gem && : || (sudo apt install ruby -y && sudo gem install one_gadget)
     check checksec && : || (pip3 install pwntools)
+    chech docker && : || (sudo apt install docker.io && sudo chmod 666 /var/run/docker.sock)
+    ### Change Permission to avoid error while `docker pull` command
 fi
 
 
@@ -243,6 +249,9 @@ source ~/.zsh_setup/zsh-autosuggestions/zsh-autosuggestions.zsh
 ### https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
+
+### Dirsearch
+[ -d ~/dirsearch/ ] && : || (git clone https://github.com/maurosoria/dirsearch ~/dirsearch && export PATH=$HOME/dirsearch:$PATH)
 
 ## Download Script : alias.sh / ip.sh
 ### Path : ~/.zsh/
@@ -269,6 +278,7 @@ alias ls='ls -alh'
 alias vimzshrc='vim ~/.zshrc && source $_ && cp ~/.zshrc ~/.zsh_setup'
 alias src='source ~/.zshrc'
 alias pushzsh='cp ~/.zshrc ~/.zsh_setup && cd ~/.zsh_setup && git add . && git commit -m "Update" && git push'
+alias dirsearch='dirsearch.py'
 
 if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
