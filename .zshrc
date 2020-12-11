@@ -251,6 +251,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
 
 ### Dirsearch
+## https://www.macworld.co.uk/how-to/show-hidden-files-mac-3520878/
 [ -d ~/dirsearch/ ] && : || (git clone https://github.com/maurosoria/dirsearch ~/dirsearch && export PATH=$HOME/dirsearch:$PATH)
 
 ## Download Script : alias.sh / ip.sh
