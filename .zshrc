@@ -139,9 +139,11 @@ if [[ $envos = "macOS" ]]; then
     #### Finder Config
     $(defaults read com.apple.Finder AppleShowAllFiles) && : || (defaults write com.apple.Finder AppleShowAllFiles true)
     
-    #### Environment Variable
-    export PATH=/usr/local/bin:$PATH
+    #### Environment Variable (Priority Sensitive)
+	## Allow brew package instead of pre-installed from macOS origin package
     export PATH="$(brew --prefix)/bin:$PATH"
+    export PATH=/usr/local/bin:$PATH
+    
 
     ## Brew Config
     ## Ref : https://docs.brew.sh/Shell-Completion
@@ -151,6 +153,10 @@ if [[ $envos = "macOS" ]]; then
         autoload -Uz compinit
         compinit
     fi
+
+	### ZSH Syntax Highlight
+    ### brew install zsh-syntax-highlighting
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
     #### Functions
     ### Allow using `code` command to exec VScode
@@ -249,9 +255,7 @@ source ~/.zsh_setup/zsh-autosuggestions/zsh-autosuggestions.zsh
 ### https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
-
 ### Dirsearch
-## https://www.macworld.co.uk/how-to/show-hidden-files-mac-3520878/
 [ -d ~/dirsearch/ ] && : || (git clone https://github.com/maurosoria/dirsearch ~/dirsearch && export PATH=$HOME/dirsearch:$PATH)
 
 ## Download Script : alias.sh / ip.sh
