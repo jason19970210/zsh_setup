@@ -142,7 +142,30 @@ if [[ $envos = "macOS" ]]; then
     #### Environment Variable (Priority Sensitive)
 	## Allow brew package instead of pre-installed from macOS origin package
     export PATH="$(brew --prefix)/bin:$PATH"
-    export PATH=/usr/local/bin:$PATH
+	export PATH="/usr/local/sbin:$PATH"
+    #export PATH=$HOME/.zsh_setup:$PATH
+	export PATH=/usr/local/bin:$PATH
+	
+	## Enable ZSH with `Colors`
+	#export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+	#eval $(gdircolors -b $HOME/.dircolors)
+	#if [ -n "$LS_COLORS" ]; then
+	#zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+	#zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+	#fi
+	# ==== #
+	#autoload -U colors
+	#colors
+	#export clicolor=1
+	# ==== #
+	## The BEST way
+	# Ref : https://www.cyberciti.biz/faq/apple-mac-osx-terminal-color-ls-output-option/
+	export CLICOLOR=1
+	export LSCOLORS=GxFxCxDxBxegedabagaced ## By changing this color serials to make different color of file type [See Ref link]
+
+	# https://stackoverflow.com/questions/689765/how-can-i-change-the-color-of-my-prompt-in-zsh-different-from-normal-text
+	# PROMPT='%F{240}%n%F{red}@%F{green}%m:%F{141}%d$ %F{reset}'  ## This will change the Prompt color 
+
     
 
     ## Brew Config
@@ -255,6 +278,9 @@ source ~/.zsh_setup/zsh-autosuggestions/zsh-autosuggestions.zsh
 ### https://github.com/zsh-users/zsh-autosuggestions#suggestion-strategy
 ZSH_AUTOSUGGEST_STRATEGY=(history completion match_prev_cmd)
 
+# Disable annoying confirm
+setopt no_nomatch
+
 ### Dirsearch
 [ -d ~/dirsearch/ ] && : || (git clone https://github.com/maurosoria/dirsearch ~/dirsearch && export PATH=$HOME/dirsearch:$PATH)
 
@@ -289,6 +315,7 @@ if [ $envos = "macOS" ]; then
     alias lscpu='echo "$ system_profiler SPHardwareDataType\n" && system_profiler SPHardwareDataType'
     alias speedtest='speedtest-cli'
     alias ghidra='zsh /Users/macbook/Documents/ghidra_v9.2/ghidraRun'
+	alias purge='echo " " | sudo -S purge'
 
     ## For WireGuard VPN Service (ADL Lab)
     ### https://hq.network/blog/cheatsheet-for-wireguard/
@@ -297,6 +324,9 @@ if [ $envos = "macOS" ]; then
     alias vpn_on='echo " " | sudo -S wg-quick up ~/.config/wireguard/wg0.conf && echo ' 
     alias vpn_off='wg-quick down ~/.config/wireguard/wg0.conf && echo '
     alias vpn_status='sudo wg show'
+	
+	# Run each time when terminal open
+	purge > /dev/null 2>&1
 fi
 
 ### Default Command which will execute every time when shell loaded
